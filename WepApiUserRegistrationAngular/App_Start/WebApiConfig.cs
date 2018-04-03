@@ -1,5 +1,4 @@
 ﻿using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace WepApiUserRegistrationAngular
 {
@@ -7,7 +6,7 @@ namespace WepApiUserRegistrationAngular
     {
         public static void Register(HttpConfiguration config)
         {
-            config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*"));
+            //config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*"));
 
             // Web API configuration and services
 
@@ -19,6 +18,7 @@ namespace WepApiUserRegistrationAngular
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Filters.Add(new AuthorizeAttribute());
         }
     }
 }
